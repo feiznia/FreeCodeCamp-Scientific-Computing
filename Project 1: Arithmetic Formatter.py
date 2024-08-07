@@ -3,9 +3,9 @@ def arithmetic_arranger(problems, show_answers=False):
     operations = list(map(lambda x: x.split()[1], problems))
     numbers = []
     if len(problems) > 5:
-        return 'Error: Too may problems.'
+        return 'Error: Too many problems.'
 
-    if set(operations) != {'+', '-'} and len(set(operations)) != 2:
+    if set(operations) != {'+', '-'} and len(set(operations)) != 1:
         return "Error: Operator must be '+' or '-'."
  
     for i in problems:
