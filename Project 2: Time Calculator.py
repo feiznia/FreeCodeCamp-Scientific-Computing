@@ -1,3 +1,14 @@
+weekdays = {
+    "": "",
+    "Sunday": 1,
+    "Monday": 2,
+    "Tuesday": 3,
+    "Wednesday": 4,
+    "Thursday": 5,
+    "Friday": 6,
+    "Saturday": 7
+}
+
 def add_time(start, duration, day=None):
     am_pm = start[-2:]
     star = start[:len(start)-3]
@@ -35,6 +46,16 @@ def add_time(start, duration, day=None):
         tod = 'PM'
         new_hr = new_hr - 12
 
+    if day:
+        dayIndex = (weekdays[day.capitalize()] + days - 1) % 7 + 1
+        newDay = None
+        for k, v in weekdays.items():
+            if v == dayIndex:
+                newDay = k
+                break
+    else:
+        newDay = ""
+
     new_hr = str(new_hr)
     tod = str(tod)
     ndays = str(ndays)
@@ -43,9 +64,16 @@ def add_time(start, duration, day=None):
     else:
         new_min = str(new_min)
     
-    if ndays:
-        new_time = new_hr+":"+new_min+" "+tod+" "+ndays
+    if day:
+        if ndays:
+            new_time = new_hr+":"+new_min+" "+tod+", "+newDay+" "+ndays
+        else:
+            new_time = new_hr+":"+new_min+" "+tod+", "+newDay
     else:
-        new_time = new_hr+":"+new_min+" "+tod
+        if ndays:
+            new_time = new_hr+":"+new_min+" "+tod+" "+ndays
+        else:
+            new_time = new_hr+":"+new_min+" "+tod
+
     # print(new_time)
     return new_time
